@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Cryptochecker",
+    "description": "React Native cryptochecker",
+    "slug": "rnr-cryptochecker",
+    "privacy": "public",
+    "sdkVersion": "31.0.0",
+    "platforms": ["android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.junjun.serezon"
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
