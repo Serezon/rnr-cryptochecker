@@ -1,10 +1,18 @@
-import React, { Component } from 'react'
+//@flow
+import * as React from 'react'
+import type { ComponentType } from 'react'
 import { StyleSheet, Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
+import type { State, InitialStateType } from '../Utils/StateType.js'
 import FetchCoinData from '../Actions/FetchCoinData'
 import CoinCard from './CoinCard'
 
-export class CryptoContainer extends Component {
+type Props = {
+  crypto: InitialStateType,
+  FetchCoinData: Function
+}
+
+export class CryptoContainer extends React.Component<Props> {
 
   componentDidMount() {
     this.props.FetchCoinData()
@@ -13,7 +21,7 @@ export class CryptoContainer extends Component {
   renderCoinCards() {
     const { crypto } = this.props
 
-    return crypto.data.map((coin, index) => (
+    const cards: Array<React.Node> = crypto.data.map((coin, index) => (
       <CoinCard
         key={index}
         coin_name={coin.name}
@@ -23,6 +31,8 @@ export class CryptoContainer extends Component {
         percent_change_7d={coin.quote.USD.percent_change_7d}
       />
     ))
+
+    return cards
   }
 
   render() {
@@ -38,18 +48,16 @@ export class CryptoContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { crypto } = state
-
-  return {
-    crypto
-  }
-}
-
 const styles = StyleSheet.create({
   listView: {
     marginBottom: 50
   }
 })
 
-export default connect(mapStateToProps, { FetchCoinData })(CryptoContainer)
+const mapStateToProps = (state: State): State => {
+  const { crypto } = state
+
+  return { crypto }
+}
+
+export default (connect(mapStateToProps, { FetchCoinData })(CryptoContainer): ComponentType<Props>)

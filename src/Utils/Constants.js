@@ -1,1 +1,2 @@
-export const apiBaseUrl = 'https://pro-api.coinmarketcap.com'
+//@flow
+export const apiBaseUrl: string = 'https://pro-api.coinmarketcap.com'

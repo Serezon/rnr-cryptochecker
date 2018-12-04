@@ -1,14 +1,18 @@
+//@flow
 import { apiBaseUrl } from '../Utils/Constants'
-import {
-  FETCHING_COIN_DATA,
-  FETCHING_COIN_DATA_FAIL,
-  FETCHING_COIN_DATA_SUCCESS
+import type { 
+  FetchingCoinDataType,
+  Dispatch
 } from '../Utils/ActionTypes'
 
-export default function FetchCoinData() {
-  return dispatch => {
+const FetchCoinDataAction = (): FetchingCoinDataType => ({
+  type: 'FETCHING_COIN_DATA'
+})
 
-    dispatch({ type: FETCHING_COIN_DATA })
+export default function FetchCoinData() {
+  return (dispatch: Dispatch) => {
+
+    dispatch(FetchCoinDataAction())
 
     const fetchData = {
       method: 'GET',
@@ -21,12 +25,10 @@ export default function FetchCoinData() {
     return fetch(`${apiBaseUrl}/v1/cryptocurrency/listings/latest?limit=10`, fetchData)
       .then(res => res.json())
       .then(res => {
-        console.log(res)
-        dispatch({ type: FETCHING_COIN_DATA_SUCCESS, payload: res.data })
+        dispatch({ type: 'FETCHING_COIN_DATA_SUCCESS', payload: res.data })
       })
       .catch(err => {
-        console.log(err)
-        dispatch({ type: FETCHING_COIN_DATA_FAIL, payload: err })
+        dispatch({ type: 'FETCHING_COIN_DATA_FAIL', payload: err })
       })
   }
 }

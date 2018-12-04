@@ -1,10 +1,18 @@
-import React from 'react'
+//@flow
+import * as React from 'react'
 import { Text, StyleSheet, View, Image } from 'react-native'
 import { images } from '../Utils/CoinIcons'
 
-const CoinCard = ({ symbol, price_usd, percent_change_24h, percent_change_7d, coin_name }) => {
+type Props = {
+  symbol: string,
+  coin_name: string,
+  price_usd: number,
+  percent_change_24h: number,
+  percent_change_7d: number
+}
 
-  return (
+const CoinCard = ({ symbol, price_usd, percent_change_24h, percent_change_7d, coin_name }: Props) =>
+  (
     <View style={styles.container}>
       <View style={styles.main}>
         <View style={styles.mainLeft}>
@@ -20,22 +28,22 @@ const CoinCard = ({ symbol, price_usd, percent_change_24h, percent_change_7d, co
       </View>
 
       <View style={styles.additionalInfo}>
-        <Text>24h: 
+        <Text>24h:
           <Text style={percent_change_24h >= 0 ? styles.percentInc : styles.percentDec}>
             {percent_change_24h}%
-          </Text> 
+          </Text>
         </Text>
 
-        <Text>7d: 
+        <Text>7d:
           <Text style={percent_change_7d >= 0 ? styles.percentInc : styles.percentDec}>
             {percent_change_7d}%
-          </Text> 
+          </Text>
         </Text>
       </View>
 
     </View>
   )
-}
+
 
 const styles = StyleSheet.create({
   container: {

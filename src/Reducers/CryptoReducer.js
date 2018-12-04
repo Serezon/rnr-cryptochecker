@@ -1,19 +1,23 @@
-import {
-  FETCHING_COIN_DATA,
-  FETCHING_COIN_DATA_FAIL,
-  FETCHING_COIN_DATA_SUCCESS
+//@flow
+import type { 
+  FetchingCoinDataType,
+  FetchingCoinDataSuccessType,
+  FetchingCoinDataFailType,
+  ActionType
 } from '../Utils/ActionTypes'
 
+import type { InitialStateType } from '../Utils/StateType'
+
 const initialState = {
-  isFetching: null,
+  isFetching: false,
   data: [],
   hasError: false,
   errorMessage: null
 }
 
-export default (state = initialState, action) => {
+export default (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
-    case FETCHING_COIN_DATA:
+    case 'FETCHING_COIN_DATA':
       return {
         ...state,
         isFetching: true,
@@ -22,14 +26,14 @@ export default (state = initialState, action) => {
         errorMessage: null
       }
 
-    case FETCHING_COIN_DATA_SUCCESS:
+    case 'FETCHING_COIN_DATA_SUCCESS':
       return {
         ...state,
         isFetching: false,
         data: action.payload
       }
 
-    case FETCHING_COIN_DATA_FAIL:
+    case 'FETCHING_COIN_DATA_FAIL':
       return {
         ...state,
         isFetching: false,

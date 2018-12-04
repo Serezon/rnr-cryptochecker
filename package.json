@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
+    "flow-bin": "^0.87.0",
     "redux-logger": "^3.0.6"
   }
 }
